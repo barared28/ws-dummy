@@ -24,6 +24,9 @@ const EVENT_KEY_BIG_SCREEN = {
   MOVE_TO_SELECT_LITE_FULL: 'move-to-select-lite-full',
   MOVE_TO_SELECT_MODE: 'move-to-select-mode',
   MOVE_TO_SELECT_SESSION: 'move-to-select-session',
+  STOP_SESSION: 'stop-session',
+  START_SESSION: 'start-session',
+  CHANGE_DURATION_SESSION: 'change-duration-session',
 };
 
 const ACTION_KEY_BIG_SCREEN = {
@@ -36,6 +39,9 @@ const ACTION_KEY_SMALL_SCREEN = {
   SET_ACTIVE: 'set-active',
   SET_ON_IDLE: 'set-on-idle',
   SET_ON_LOGIN: 'set-on-login',
+  STOP_SESSION: 'stop-session',
+  START_SESSION: 'start-session',
+  CHANGE_DURATION_SESSION: 'change-duration-session',
 };
 
 @WebSocketGateway({
@@ -118,6 +124,24 @@ export class RoutingGateway {
           event: EVENT_KEY_BIG_SCREEN.CHANGE_IDLE,
           data: null,
         });
+        break;
+      case ACTION_KEY_SMALL_SCREEN.START_SESSION:
+        this.server.emit(BIG_SCREEN, {
+          event: EVENT_KEY_BIG_SCREEN.START_SESSION,
+          data: null,
+        })
+        break;
+      case ACTION_KEY_SMALL_SCREEN.STOP_SESSION:
+        this.server.emit(BIG_SCREEN, {
+          event: EVENT_KEY_BIG_SCREEN.STOP_SESSION,
+          data: null,
+        })
+        break;
+      case ACTION_KEY_SMALL_SCREEN.CHANGE_DURATION_SESSION:
+        this.server.emit(BIG_SCREEN, {
+          event: EVENT_KEY_BIG_SCREEN.CHANGE_DURATION_SESSION,
+          data: data,
+        })
         break;
       default:
         break;
